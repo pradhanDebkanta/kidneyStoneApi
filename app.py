@@ -30,7 +30,7 @@ def get_prediction():
         y = np.expand_dims(y, axis=0)
 
         automl = keras.models.load_model(
-            'E:/program file/python program/pycharm/kidneyStoneApi/model_CNN.h5')
+            './model_CNN.h5')
         predictions = automl.predict(y).flatten()
         print('predicted result==>', predictions)
         if int(predictions[0]) == 1:
