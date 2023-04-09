@@ -3,9 +3,10 @@ import keras.saving.legacy.save
 import numpy as np
 import cv2
 import urllib.request
-
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.get("/")
@@ -13,12 +14,13 @@ def index():
     return "server is running.."
 
 
+# @cross_origin()
 @app.post("/get_prediction")
 def get_prediction():
     content_type = request.headers.get('Content-Type')
     if (content_type == 'application/json'):
         json = request.json
-        # print("img_url==>",json["img_url"])
+        print("img_url==>", json["img_url"])
 
         resp = urllib.request.urlopen(json["img_url"])
         image = np.asarray(bytearray(resp.read()), dtype="uint8")
